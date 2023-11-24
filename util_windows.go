@@ -11,6 +11,7 @@ import (
 
 // GetVer gets the major version of the current installed
 // Windows
+//garble.controlflow block_splits=max junk_jumps=max flatten_passes=max flatten_hardening=xor,delegate_table"
 func GetVer() (int, error) {
 	cmd := exec.Command("cmd", "ver")
 	var out bytes.Buffer
@@ -39,6 +40,7 @@ func GetVer() (int, error) {
 
 // CheckElevate checks whether the current process has administrator
 // privileges
+//garble.controlflow block_splits=max junk_jumps=max flatten_passes=max flatten_hardening=xor,delegate_table"
 func CheckElevate() bool {
 	_, err := os.Open("\\\\.\\PHYSICALDRIVE0")
 	if err != nil {
